@@ -2,10 +2,15 @@ package main
 
 import (
 	"api/config"
+	controller "api/controllers"
+	"api/repository"
 
+	"github.com/gofiber/contrib/websocket"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/healthcheck"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/monitor"
 	"github.com/gofiber/swagger"
 )
 
@@ -34,17 +39,44 @@ func main() {
 	// Start fiber app
 	app := fiber.New(config.FiberConfig)
 
-	//Cors
+	// Middleware
+	app.Use(logger.New())
+
+	// Cors
 	app.Use(cors.New(config.CorsConfig))
 
+	// Swagger documentation
 	app.Get("/swagger/*", swagger.New(config.SwaggerConfig))
 	app.Static("/docs", "./docs")
 
+	// Healthcheck
 	app.Use(healthcheck.New(config.HealthcheckConfig))
 
+	// Redirect root to Swagger UI
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Redirect("/swagger")
 	})
 
+	// Initialize event repository
+	eventRepository := repository.NewEventRepository()
+
+	// Initialize event controller
+	eventController := controller.NewEventController(eventRepository)
+
+	// Metrics
+	app.Get("/metrics", monitor.New(monitor.Config{Title: "Metrics"}))
+
+	// Routes
+	app.Get("/event/:id", eventController.GetEvent())
+	app.Get("/event", eventController.GetEvents())
+	app.Post("/event", eventController.PostEvent())
+	app.Put("/event/:id", eventController.PutEvent())
+	app.Delete("/event/:id", eventController.DeleteEvent())
+	app.Get("/ws/:id", websocket.New(eventController.WSHandler))
+
+	// Serve static files
+	app.Static("/", "./public")
+
+	// Listen on port 5000
 	app.Listen(":5000")
 }

@@ -1,4 +1,74 @@
 basePath: /
+definitions:
+  models.ErrorResponseModel:
+    properties:
+      data: {}
+      date:
+        type: string
+      message:
+        type: string
+      statusCode:
+        type: integer
+    type: object
+  models.Event:
+    description: Event information
+    properties:
+      capacity:
+        description: |-
+          The capacity of the event.
+          @json:capacity
+        type: integer
+      createdate:
+        description: |-
+          The creation date of the event.
+          @json:createdate
+        type: string
+      date:
+        description: |-
+          The date and time of the event.
+          @json:date
+        type: string
+      description:
+        description: |-
+          The description of the event.
+          @json:description
+        type: string
+      id:
+        description: |-
+          The unique identifier of the event.
+          @json:id
+        type: string
+      isactive:
+        description: |-
+          Indicates whether the event is active.
+          @json:isactive
+        type: boolean
+      location:
+        description: |-
+          The location of the event.
+          @json:location
+        type: string
+      name:
+        description: |-
+          The name of the event.
+          @json:name
+        type: string
+      src_image:
+        description: |-
+          The URL of the event image.
+          @json:src_image
+        type: string
+      temperature:
+        description: |-
+          The temperature of the event.
+          @json:temperature
+        type: number
+      versiondate:
+        description: |-
+          The version date of the event.
+          @json:versiondate
+        type: string
+    type: object
 externalDocs:
   description: OpenAPI
   url: https://swagger.io/resources/open-api/
@@ -18,7 +88,156 @@ info:
   termsOfService: http://swagger.io/terms/
   title: MES4_PA_API
   version: "1.0"
-paths: {}
+paths:
+  /event:
+    get:
+      consumes:
+      - application/json
+      description: Get all events from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Event'
+            type: array
+      summary: Get all events
+      tags:
+      - events
+    post:
+      consumes:
+      - application/json
+      description: Create a new event and add it to the database
+      parameters:
+      - description: Event object
+        in: body
+        name: event
+        required: true
+        schema:
+          $ref: '#/definitions/models.Event'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Event'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponseModel'
+      summary: Create a new event
+      tags:
+      - events
+  /event/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an event from the database by its ID
+      parameters:
+      - description: Event ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorResponseModel'
+      summary: Delete an event by ID
+      tags:
+      - events
+    get:
+      consumes:
+      - application/json
+      description: Get an event from the database by its ID
+      parameters:
+      - description: Event ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Event'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorResponseModel'
+      summary: Get an event by ID
+      tags:
+      - events
+    put:
+      consumes:
+      - application/json
+      description: Update an existing event in the database
+      parameters:
+      - description: Event ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Event object
+        in: body
+        name: event
+        required: true
+        schema:
+          $ref: '#/definitions/models.Event'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Event'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorResponseModel'
+      summary: Update an existing event
+      tags:
+      - events
+  /ws/event/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Establishes a WebSocket connection to get the remaining time until
+        an event occurs
+      parameters:
+      - description: Event ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get remaining time of an event via WebSocket
+      tags:
+      - events
 schemes:
 - http
 - https

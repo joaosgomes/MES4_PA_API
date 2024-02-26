@@ -15,7 +15,10 @@ go mod init api
 go get github.com/gofiber/fiber/v2
 go get github.com/gofiber/swagger
 go get -u github.com/gofiber/template/html/v2
-
+go get github.com/gofiber/contrib/websocket
+--go get github.com/gofiber/websocket/v2
+--go get github.com/gofiber/websocket
+go get github.com/gofiber/contrib/websocket
 ````
 
 ### Swagger
