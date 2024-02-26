@@ -217,6 +217,149 @@
                 }
             }
         },
+        "/image": {
+            "get": {
+                "description": "Get all images from the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "images"
+                ],
+                "summary": "Get all images",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Image"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new image and add it to the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "images"
+                ],
+                "summary": "Create a new image",
+                "parameters": [
+                    {
+                        "description": "Image object",
+                        "name": "image",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Image"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Image"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponseModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/image/{id}": {
+            "get": {
+                "description": "Get an image from the database by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "images"
+                ],
+                "summary": "Get an image by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Image ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Image"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponseModel"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete an image from the database by its ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "images"
+                ],
+                "summary": "Delete an image by ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Image ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponseModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/models.ErrorResponseModel"
+                        }
+                    }
+                }
+            }
+        },
         "/ws/event/{id}": {
             "get": {
                 "description": "Establishes a WebSocket connection to get the remaining time until an event occurs",
@@ -306,6 +449,32 @@
                 },
                 "versiondate": {
                     "description": "The version date of the event.\n@json:versiondate",
+                    "type": "string"
+                }
+            }
+        },
+        "models.Image": {
+            "description": "Image information",
+            "type": "object",
+            "properties": {
+                "alt": {
+                    "description": "Alt text for the image\n@json:alt",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description of the image\n@json:description",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "ID of the image\n@json:id",
+                    "type": "string"
+                },
+                "size": {
+                    "description": "Size of the image in bytes\n@json:size",
+                    "type": "integer"
+                },
+                "src_image": {
+                    "description": "Source URL of the image\n@json:src_image",
                     "type": "string"
                 }
             }

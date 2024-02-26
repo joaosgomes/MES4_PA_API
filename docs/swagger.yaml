@@ -69,6 +69,35 @@ definitions:
           @json:versiondate
         type: string
     type: object
+  models.Image:
+    description: Image information
+    properties:
+      alt:
+        description: |-
+          Alt text for the image
+          @json:alt
+        type: string
+      description:
+        description: |-
+          Description of the image
+          @json:description
+        type: string
+      id:
+        description: |-
+          ID of the image
+          @json:id
+        type: string
+      size:
+        description: |-
+          Size of the image in bytes
+          @json:size
+        type: integer
+      src_image:
+        description: |-
+          Source URL of the image
+          @json:src_image
+        type: string
+    type: object
 externalDocs:
   description: OpenAPI
   url: https://swagger.io/resources/open-api/
@@ -219,6 +248,101 @@ paths:
       summary: Update an existing event
       tags:
       - events
+  /image:
+    get:
+      consumes:
+      - application/json
+      description: Get all images from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Image'
+            type: array
+      summary: Get all images
+      tags:
+      - images
+    post:
+      consumes:
+      - application/json
+      description: Create a new image and add it to the database
+      parameters:
+      - description: Image object
+        in: body
+        name: image
+        required: true
+        schema:
+          $ref: '#/definitions/models.Image'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Image'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponseModel'
+      summary: Create a new image
+      tags:
+      - images
+  /image/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an image from the database by its ID
+      parameters:
+      - description: Image ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.ErrorResponseModel'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorResponseModel'
+      summary: Delete an image by ID
+      tags:
+      - images
+    get:
+      consumes:
+      - application/json
+      description: Get an image from the database by its ID
+      parameters:
+      - description: Image ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Image'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.ErrorResponseModel'
+      summary: Get an image by ID
+      tags:
+      - images
   /ws/event/{id}:
     get:
       consumes:

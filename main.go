@@ -59,9 +59,13 @@ func main() {
 
 	// Initialize event repository
 	eventRepository := repository.NewEventRepository()
+	// Initialize image repository
+	imageRepository := repository.NewImageRepository()
 
 	// Initialize event controller
 	eventController := controller.NewEventController(eventRepository)
+	// Initialize image controller
+	imageController := controller.NewImageController(imageRepository)
 
 	// Metrics
 	app.Get("/metrics", monitor.New(monitor.Config{Title: "Metrics"}))
@@ -73,6 +77,11 @@ func main() {
 	app.Put("/event/:id", eventController.PutEvent())
 	app.Delete("/event/:id", eventController.DeleteEvent())
 	app.Get("/ws/:id", websocket.New(eventController.WSHandler))
+
+	app.Get("/image/:id", imageController.GetImage())
+	app.Get("/image", imageController.GetImages())
+	app.Post("/image", imageController.PostImage())
+	app.Delete("/image/:id", imageController.DeleteImage())
 
 	// Serve static files
 	app.Static("/", "./public")
