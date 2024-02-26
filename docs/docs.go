@@ -9,22 +9,45 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "João Da Silva Gomes",
+            "url": "https://joaosilvagomes.pt",
+            "email": "joao.s.gomes@outlook.pt"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {},
+    "tags": [
+        {
+            "description": "MES4_PA_API",
+            "name": "MES4_PA_API",
+            "externalDocs": {
+                "description": "https://github.com/joaosgomes/MES4_PA_API",
+                "url": "https://github.com/joaosgomes/MES4_PA_API"
+            }
+        }
+    ],
+    "externalDocs": {
+        "description": "OpenAPI",
+        "url": "https://swagger.io/resources/open-api/"
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
-	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Version:          "1.0",
+	Host:             "localhost:5000",
+	BasePath:         "/",
+	Schemes:          []string{"http", "https"},
+	Title:            "MES4_PA_API",
+	Description:      "Description MES4_PA_API\nDescription MES4_PA_API GO\nDescription MES4_PA_API GO Fiber",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

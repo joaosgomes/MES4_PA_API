@@ -1,7 +1,39 @@
 {
+    "schemes": [
+        "http",
+        "https"
+    ],
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "Description MES4_PA_API\nDescription MES4_PA_API GO\nDescription MES4_PA_API GO Fiber",
+        "title": "MES4_PA_API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "João Da Silva Gomes",
+            "url": "https://joaosilvagomes.pt",
+            "email": "joao.s.gomes@outlook.pt"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
     },
-    "paths": {}
+    "host": "localhost:5000",
+    "basePath": "/",
+    "paths": {},
+    "tags": [
+        {
+            "description": "MES4_PA_API",
+            "name": "MES4_PA_API",
+            "externalDocs": {
+                "description": "https://github.com/joaosgomes/MES4_PA_API",
+                "url": "https://github.com/joaosgomes/MES4_PA_API"
+            }
+        }
+    ],
+    "externalDocs": {
+        "description": "OpenAPI",
+        "url": "https://swagger.io/resources/open-api/"
+    }
 }

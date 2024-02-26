@@ -1,4 +1,31 @@
+basePath: /
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:5000
 info:
-  contact: {}
+  contact:
+    email: joao.s.gomes@outlook.pt
+    name: João Da Silva Gomes
+    url: https://joaosilvagomes.pt
+  description: |-
+    Description MES4_PA_API
+    Description MES4_PA_API GO
+    Description MES4_PA_API GO Fiber
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: MES4_PA_API
+  version: "1.0"
 paths: {}
+schemes:
+- http
+- https
 swagger: "2.0"
+tags:
+- description: MES4_PA_API
+  externalDocs:
+    description: https://github.com/joaosgomes/MES4_PA_API
+    url: https://github.com/joaosgomes/MES4_PA_API
+  name: MES4_PA_API

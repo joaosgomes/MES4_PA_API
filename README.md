@@ -1,6 +1,10 @@
 # MES4 PA
 
+### GitHub Repos:
 
+(BE) https://github.com/joaosgomes/MES4_PA_API
+
+(FE) https://github.com/joaosgomes/MES4_PA_FE
 
 ## API
 
@@ -64,8 +68,17 @@ npm install gh-pages --save-dev
 
 ````
  npm start
+ 
+ npm run deploy
+ 
 
 ````
+
+
+
+### Deploy FE (gh-pages)
+
+https://joaosgomes.github.io/MES4_PA_FE/
 
 
 ### GitHub:
@@ -73,10 +86,28 @@ npm install gh-pages --save-dev
 ````
 
 git init
-git add README.md
-git commit -m "first commit"
+git add .
+git commit -m "."
 git branch -M main
-git remote add origin https://github.com/joaosgomes/MES4_PA.git
+git remote add origin https://github.com/joaosgomes/MES4_PA_API.git
 git push -u origin main
 
 ````
+
+
+````
+git init
+git add .
+git commit -m "."
+git branch -M main
+git remote add origin https://github.com/joaosgomes/MES4_PA_FE.git
+git push -u origin main
+
+````
+
+
+
+## References:
+
+https://chat.openai.com/
+https://stackoverflow.com/
