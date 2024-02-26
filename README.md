@@ -8,6 +8,28 @@
 
 ## API
 
+
+
+### Architecture
+
+
+#### Project Structure
+````
+
+├───config
+├───controllers
+├───db
+├───docs
+├───models
+├───public
+│   ├───scripts
+│   └───styles
+├───repository
+├───services
+├───utils
+└───views
+````
+
 ````
 
 go mod init api
@@ -39,15 +61,24 @@ go build main.go
 
 go run main.go  //Check if port is not in use
 
+
+
 ````
 
 ### Routes
 
 ````
 http://localhost:5000/
+http://localhost:5000/swagger
 http://localhost:5000/live
 http://localhost:5000/ready
-
+http://localhost:5000/metrics
+http://localhost:5000/event/:id", GetEvent()
+http://localhost:5000/event", GetEvents()
+http://localhost:5000/event", PostEvent()
+http://localhost:5000/event/:id", PutEvent()
+http://localhost:5000/event/:id", DeleteEvent()
+http://localhost:5000/ws/:id", WSHandler()
 ````
 
 
