@@ -121,12 +121,31 @@ func (h *EventController) PutEvent() fiber.Handler {
 			return c.Status(fiber.StatusBadRequest).JSON(models.Error(util.ErrInvalidRequestPayload, nil, fiber.StatusBadRequest))
 		}
 
-		// Update the event in the repository
-		if err := h.eventRepo.UpdateEvent(&event); err != nil {
-			return c.Status(fiber.StatusNotFound).JSON(models.Error(err.Error(), nil, fiber.StatusBadRequest))
+		// Fetch the existing event from the repository
+		existingEvent, err := h.eventRepo.GetEventByID(eventID)
+		if err != nil {
+			return c.Status(fiber.StatusNotFound).JSON(models.Error(util.ErrEventNotFound, nil, fiber.StatusNotFound))
 		}
 
-		return c.JSON(event)
+		// Update the event's properties
+		existingEvent.Name = event.Name
+		existingEvent.Description = event.Description
+		existingEvent.Location = event.Location
+		existingEvent.Capacity = event.Capacity
+		existingEvent.IsActive = event.IsActive
+		existingEvent.VersionDate = time.Now()
+
+		// Check if the image is provided in the payload
+		if event.Src_Image != "" {
+			existingEvent.Src_Image = event.Src_Image
+		}
+
+		// Update the event in the repository
+		if err := h.eventRepo.UpdateEvent(existingEvent); err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(models.Error(err.Error(), nil, fiber.StatusInternalServerError))
+		}
+
+		return c.JSON(existingEvent)
 	}
 }
 

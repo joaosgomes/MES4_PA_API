@@ -117,6 +117,9 @@ npm install axios
 npm install antd --save
 
 npm install gh-pages --save-dev
+
+npm install moment
+
 ````
 
 
