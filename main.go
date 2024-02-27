@@ -66,6 +66,8 @@ func main() {
 	eventController := controller.NewEventController(eventRepository)
 	// Initialize image controller
 	imageController := controller.NewImageController(imageRepository)
+	// Initialize Template controller
+	eventTemplateController := controller.EventTemplateRepository(eventRepository)
 
 	// Metrics
 	app.Get("/metrics", monitor.New(monitor.Config{Title: "Metrics"}))
@@ -85,6 +87,10 @@ func main() {
 
 	// Serve static files
 	app.Static("/", "./public")
+
+	//Template (HTML)
+	app.Get("/events", eventTemplateController.GetEventsTemplate)
+	app.Get("/events/:id", eventTemplateController.GetEventTemplate)
 
 	// Listen on port 5000
 	app.Listen(":5000")

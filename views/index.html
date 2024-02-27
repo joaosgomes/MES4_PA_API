@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Web site created using create-react-app" />
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="/styles/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+
+    <title>{{.Title}}</title>
+
+    <!-- HTMX -->
+    <script src="/scripts/htmx.min.js"></script>
+    <script src="/scripts/lazysizes.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Check CDN URL -->
+
+
+</head>
+
+<body>
+
+    <header class="bg-white py-4">
+        <h1 class="text-gray-400 text-xl font-bold text-center"> {{ .Title }}</h1>
+    </header>
+
+    <!-- Render list of events if available -->
+    {{ if .Events }}
+    <div class="columns-2 md:columns-3 lg:columns-4 bg-white">
+        {{ range .Events }}
+
+        <a href="/events/{{ .Id }}" target="_blank" class="grid effect relative mb-4 mr-4 ml-4 mt-auto">
+
+            <div
+                class="relative mb-4 before:content-[''] before:rounded-md before:absolute before:inset-0 before:bg-white before:bg-opacity-20">
+
+                <div class="group relative rounded-md overflow-hidden transition duration-300">
+                    <img class="lazyload animate w-full rounded-md" src="/logo.svg" data-src="{{.Src_Image}}"
+                        onerror="this.onerror=null;this.src='/logo.svg';" alt="{{.Name}}">
+
+                    <div
+                        class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition duration-300">
+                    </div>
+
+                    <div
+                        class="absolute inset-0 p-8 text-white flex flex-col opacity-0 group-hover:opacity-100 transition duration-300">
+                        <div class="relative">
+                            <h3 class="text-3xl font-bold mb-3">{{.Name}}</h3>
+                            <p class="font-sm font-light">{{.Description}}</p>
+                        </div>
+                        <div class="mt-auto">
+                            <span
+                                class="bg-white bg-opacity-60 py-1 px-4 rounded-md text-white">#{{.Temperature}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </a>
+        {{ end }}
+    </div>
+    {{ end }}
+
+
+
+
+    {{ if .Error }}
+
+
+    <div class="bg-white-200 w-full px-16 md:px-0 h-screen flex items-center justify-center">
+        <div
+            class="bg-white border border-white-200 flex flex-col items-center justify-center px-4 md:px-8 lg:px-24 py-8 rounded-lg shadow-2xl">
+            <p class="text-6xl md:text-7xl lg:text-9xl font-bold tracking-wider text-gray-300">{{.Error}}</p>
+        </div>
+    </div>
+
+    {{ else }}
+    <!-- Render event details if available -->
+    {{ if .Event }}
+    <div>
+        <div class="lg:px-20 md:px-6 px-4 md:py-12 py-8">
+            <div class="lg:flex flex-wrap items-center justify-between">
+                <!-- Description -->
+                <div class="lg:w-1/2 mb-8 lg:mb-0">
+                    <h1 class="text-4xl font-semibold leading-9 text-gray-500 dark:text-white">{{ .Event.Name }}</h1>
+                    <p class="text-base leading-6 mt-4 text-gray-400">{{ .Event.Description }}</p>
+                </div>
+                <!-- Image -->
+                <div class="lg:w-1/2">
+                    <div class="w-full">
+                        <!-- Show small image on small screens -->
+                        <img src="/logo.svg" data-src="{{.Event.Src_Image}}" class="block w-full sm:hidden"
+                            onerror="this.onerror=null;this.src='/logo.svg';" />
+                        <!-- Show larger image on larger screens -->
+                        <img src="/logo.svg" data-src="{{.Event.Src_Image}}" class="hidden w-full sm:block"
+                            onerror="this.onerror=null;this.src='/logo.svg';" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+    {{ end }}
+
+    <br />
+
+    <footer class="bg-white py-4 text-gray-400 text-center">
+        <a href="https://github.com/joaosgomes" rel="noopener noreferrer" target="_blank">Created by @joaosgomes</a>
+    </footer>
+
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/scripts/serviceworker.js");
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+</body>
+
+</html>
