@@ -1,22 +1,23 @@
 # MES4 PA
 
-### GitHub Repos:
+## GitHub Repos
 
-(BE) https://github.com/joaosgomes/MES4_PA_API
+(BE) <https://github.com/joaosgomes/MES4_PA_API>
 
-(FE) https://github.com/joaosgomes/MES4_PA_FE
+(FE) <https://github.com/joaosgomes/MES4_PA_FE>
 
 ## API
 
-
+![go](https://go.dev/images/go-logo-blue.svg)
+![gofiber](https://gofiber.io/assets/images/logo.svg)
 
 ### Architecture
 
-
 #### Project Structure
 
-````
+````console
 
+.
 ├───config
 ├───controllers
 ├───db
@@ -31,7 +32,9 @@
 └───views
 ````
 
-````
+#### Go Packeges Used
+
+````console
 
 go mod init api
 
@@ -42,33 +45,41 @@ go get github.com/gofiber/contrib/websocket
 --go get github.com/gofiber/websocket/v2
 --go get github.com/gofiber/websocket
 go get github.com/gofiber/contrib/websocket
+go get github.com/google/uuid
 ````
 
 ### Swagger
 
 Generate Documentation
 
-````
+#### Enpoint: <http://localhost:5000/swagger>
+
+````console
 swag init
 
 ````
 
 ### Commands
 
-
-````
+````console
 
 go build main.go
 
 go run main.go  //Check if port is not in use
 
+//or
+
+MAKE build
+
+MAKE run
+
 
 
 ````
 
-### Routes
+### Routes Backend
 
-````
+````console
 http://localhost:5000/
 http://localhost:5000/swagger
 http://localhost:5000/live
@@ -86,17 +97,15 @@ http://localhost:5000/image, .PostImage()
 http://localhost:5000/image/:id, .DeleteImage()
 ````
 
-
-
 ## FE
 
+![React](https://raw.githubusercontent.com/joaosgomes/MES4_PA_FE/main/public/logo512.png)
 
 ### Architecture
 
-
 #### Project Structure
 
-````
+````console
 
 ├───components
 │   ├───layouts
@@ -108,7 +117,7 @@ http://localhost:5000/image/:id, .DeleteImage()
 └───services
 ````
 
-````
+````console
 
 npx create-react-app app --template cra-template-pwa
 
@@ -120,31 +129,26 @@ npm install gh-pages --save-dev
 
 npm install moment
 
+npm install uuid
+
 ````
 
-
-### Commands:
-
+### Commands
 
 ````
  npm start
  
  npm run deploy
  
-
 ````
-
-
 
 ### Deploy FE (gh-pages)
 
-https://joaosgomes.github.io/MES4_PA_FE/
+<https://joaosgomes.github.io/MES4_PA_FE/>
 
+### GitHub
 
-### GitHub:
-
-````
-
+````console
 git init
 git add .
 git commit -m "."
@@ -154,8 +158,7 @@ git push -u origin main
 
 ````
 
-
-````
+````console
 git init
 git add .
 git commit -m "."
@@ -165,12 +168,10 @@ git push -u origin main
 
 ````
 
+## References
 
-
-## References:
-
-https://gofiber.io/
-https://chat.openai.com/
-https://stackoverflow.com/
-https://react.dev/
-https://htmx.org/
+<https://gofiber.io/>
+<https://chat.openai.com/>
+<https://stackoverflow.com/>
+<https://react.dev/>
+<https://htmx.org/>
