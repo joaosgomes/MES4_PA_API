@@ -32,6 +32,31 @@
 └───views
 ````
 
+```mermaid
+graph TD;
+    subgraph "Go Fiber API" 
+        endpoint[http://localhost:5000/] 
+                     -->|GET| swagger["Swagger API Documentation" /swagger]
+        endpoint -->|GET| live["Live Check" /live]
+        endpoint -->|GET| ready5000["Readiness Check" /ready]
+        endpoint -->|GET| metrics5000["Metrics Endpoint" ]
+        endpoint -->|GET| eventID["Get Event by ID" event/:id]
+        endpoint -->|GET| events["Get All Events" events]
+        endpoint -->|POST| eventPost["Create New Event" event]
+        endpoint -->|PUT| eventPUT["Update Event by ID" event/:id]
+        endpoint -->|DELETE| eventDelete["Delete Event by ID" event/:id]
+        endpoint -->|GET| image["Get Image by ID" image/:id]
+        endpoint -->|GET| images["Get All Images" images]
+        endpoint -->|POST| imagePost["Upload Image" image]
+        endpoint -->|DELETE| imageDelete["Delete Image by ID" image/:id]
+        endpoint -->|GET| eventsTemplate["Get Events Template" events]
+        endpoint -->|GET| eventTemplate["Get Event Template by ID" events/:id]
+        endpoint -->|WS| ws["WebSocket Endpoint" ws/:id]
+    end
+
+	
+```
+
 #### Go Packeges Used
 
 ````console
