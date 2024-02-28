@@ -33,6 +33,7 @@
 ````
 
 ```mermaid
+
 graph TD;
     subgraph "Go Fiber API" 
         endpoint[http://localhost:5000/] 
@@ -54,7 +55,7 @@ graph TD;
         endpoint -->|WS| ws["WebSocket Endpoint" ws/:id]
     end
 
-	
+ 
 ```
 
 #### Go Packeges Used
