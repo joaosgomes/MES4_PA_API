@@ -34,26 +34,10 @@
 
 ```mermaid
 graph TD;
-    subgraph "Go Fiber API" 
-        endpoint[http://localhost:5000/] 
-                     -->|GET| swagger[swagger]
-        endpoint -->|GET| live[live]
-        endpoint -->|GET| ready[ready]
-        endpoint -->|GET| metrics[metrics]
-        endpoint -->|GET| eventID[event/:id]
-        endpoint -->|GET| events[event]
-        endpoint -->|POST| eventPost[event]
-        endpoint -->|PUT| eventPUT[event/:id]
-        endpoint -->|DELETE| eventDelete[event/:id]
-        endpoint -->|GET| image[image/:id]
-        endpoint -->|GET| images[image]
-        endpoint -->|POST| imagePost[image]
-        endpoint -->|DELETE| imageDelete[image/:id]
-        endpoint -->|GET| eventsTemplate[events]
-        endpoint -->|GET| eventTemplate[events/:id]
-        endpoint -->|WS| ws[ws/:id]
-    end
-
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
 ```
 
 #### Go Packeges Used
