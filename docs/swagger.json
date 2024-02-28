@@ -217,6 +217,68 @@
                 }
             }
         },
+        "/events": {
+            "get": {
+                "description": "Retrieve all events from the repository and render the template with the events data",
+                "consumes": [
+                    "text/html"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "tags": [
+                    "events"
+                ],
+                "summary": "Render template for displaying all events",
+                "responses": {
+                    "200": {
+                        "description": "HTML content with events data",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/events/{id}": {
+            "get": {
+                "description": "Retrieve the event specified by its ID from the repository and render the template with the event data",
+                "consumes": [
+                    "text/html"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "tags": [
+                    "events"
+                ],
+                "summary": "Render template for displaying a specific event",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Event ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "HTML content with event data",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Error message",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/image": {
             "get": {
                 "description": "Get all images from the database",

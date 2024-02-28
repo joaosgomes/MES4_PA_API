@@ -19,6 +19,14 @@ func EventTemplateRepository(eventRepo *repository.EventRepository) *EventTempla
 	}
 }
 
+// GetEventsTemplate renders the template for displaying all events.
+// @Summary Render template for displaying all events
+// @Description Retrieve all events from the repository and render the template with the events data
+// @Tags events
+// @Accept html
+// @Produce html
+// @Success 200 {string} html "HTML content with events data"
+// @Router /events [get]
 func (h *EventTemplate) GetEventsTemplate(c *fiber.Ctx) error {
 
 	events := h.eventRepo.GetAllEvents()
@@ -30,6 +38,16 @@ func (h *EventTemplate) GetEventsTemplate(c *fiber.Ctx) error {
 
 }
 
+// GetEventTemplate renders the template for displaying a specific event.
+// @Summary Render template for displaying a specific event
+// @Description Retrieve the event specified by its ID from the repository and render the template with the event data
+// @Tags events
+// @Accept html
+// @Produce html
+// @Param id path string true "Event ID" Format(uuid) // <-- Define the format as UUID
+// @Success 200 {string} html "HTML content with event data"
+// @Failure 400 {string} html "Error message"
+// @Router /events/{id} [get]
 func (h *EventTemplate) GetEventTemplate(c *fiber.Ctx) error {
 
 	id := c.Params("id")

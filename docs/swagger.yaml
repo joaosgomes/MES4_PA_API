@@ -248,6 +248,49 @@ paths:
       summary: Update an existing event
       tags:
       - events
+  /events:
+    get:
+      consumes:
+      - text/html
+      description: Retrieve all events from the repository and render the template
+        with the events data
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: HTML content with events data
+          schema:
+            type: string
+      summary: Render template for displaying all events
+      tags:
+      - events
+  /events/{id}:
+    get:
+      consumes:
+      - text/html
+      description: Retrieve the event specified by its ID from the repository and
+        render the template with the event data
+      parameters:
+      - description: Event ID
+        format: uuid
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - text/html
+      responses:
+        "200":
+          description: HTML content with event data
+          schema:
+            type: string
+        "400":
+          description: Error message
+          schema:
+            type: string
+      summary: Render template for displaying a specific event
+      tags:
+      - events
   /image:
     get:
       consumes:
