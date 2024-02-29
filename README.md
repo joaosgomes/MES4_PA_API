@@ -1,10 +1,48 @@
+
 # MES4 PA
+
+Projeto no Âmbito de Programação Avançada para a Internet
+
+O projeto é composto por:
+
+- **Backend:** Golang + FiberGo
+- **Frontend:** React.js (Create React App) + Server-Side Rendering (HTMX)
+- **UI Frameworks:** Ant Design (React) + Tailwind CSS (HTMX)
+
+Algumas Tecnologias Frontend:
+
+- WebSockets
+- Web Storage API
+- Network Information API
+- PWA
+- Web Share API
+- Vibration API
+- Navigator Interface
+- HTMX (hx-get)
+
+## Stack
+
+| Componente | Tecnologia        |
+|------------|-------------------|
+| Backend    | Golang + FiberGo  |
+| Frontend   | React.js + HTMX   |
+| UI         | Ant Design + Tailwind CSS |
+
+## Arquitetura Geral
+
+![](MES4_PA.svg)
 
 ## GitHub Repos
 
-(BE) <https://github.com/joaosgomes/MES4_PA_API>
+- (BE) [https://github.com/joaosgomes/MES4_PA_API](https://github.com/joaosgomes/MES4_PA_API)
+- (FE) [https://github.com/joaosgomes/MES4_PA_FE](https://github.com/joaosgomes/MES4_PA_FE)
+- (FE PROD DEVMODE = false) [https://github.com/joaosgomes/MES4_PA_FE](https://github.com/joaosgomes/MES4_PA_FE)
 
-(FE) <https://github.com/joaosgomes/MES4_PA_FE>
+## Deploy FE (gh-pages)
+
+- (BE Local) [https://github.com/joaosgomes/MES4_PA_API](https://github.com/joaosgomes/MES4_PA_API)
+- (FE MockData) [https://joaosgomes.github.io/MES4_PA_FE/](https://joaosgomes.github.io/MES4_PA_FE/)
+- (FE PROD DEVMODE = false) [https://joaosgomes.github.io/MES4_PA_FE_PROD](https://joaosgomes.github.io/MES4_PA_FE_PROD)
 
 ## API
 
@@ -18,24 +56,19 @@
 ````console
 
 .
+├───components
+│   ├───layouts
+│   ├───pages
+│   ├───ui
+│   └───utils
 ├───config
+├───constants
 ├───controllers
-├───db
-├───docs
-├───models
-├───public
-│   ├───scripts
-│   └───styles
-├───repository
 ├───services
-├───utils
-└───views
+│   └───db
+└───utils
+
 ````
-
-
-
-
-
 
 #### Go Packeges Used
 
@@ -147,10 +180,6 @@ npm install uuid
  
 ````
 
-### Deploy FE (gh-pages)
-
-<https://joaosgomes.github.io/MES4_PA_FE/>
-
 ### GitHub
 
 ````console
@@ -169,6 +198,15 @@ git add .
 git commit -m "."
 git branch -M main
 git remote add origin https://github.com/joaosgomes/MES4_PA_FE.git
+git push -u origin main
+
+
+
+git init
+git add .
+git commit -m "MES4_PA_FE_PROD DEVMODE = false"
+git branch -M main
+git remote add origin https://github.com/joaosgomes/MES4_PA_FE_PROD.git
 git push -u origin main
 
 ````
